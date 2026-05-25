@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Malika Store</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/bootstrap.min.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/index.css') }}">
+</head>
+
+<body>
+
+<nav class="navbar navbar-expand-md navbar-dark">
+    <div class="container-fluid px-3">
+
+        <!-- Logo -->
+        <a class="navbar-brand" href="{{ url_for('home') }}">
+            <span class="logo-text">MALIKA</span>
+        </a>
+
+        <!-- Toggle -->
+        <button class="navbar-toggler border-0"
+                type="button"
+                data-bs-toggle="collapse"
+                data-bs-target="#navbarMenu">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+
+        <!-- Collapsible Area -->
+        <div class="collapse navbar-collapse" id="navbarMenu">
+
+            <!-- Search -->
+            <form class="search-form d-flex mx-auto my-2 my-md-0"
+                  method="GET"
+                  action="{{ url_for('home') }}">
+                <input type="text"
+                       name="q"
+                       class="form-control search-input"
+                       placeholder="Search products..."
+                       value="{{ query if query else '' }}">
+                <button class="btn search-btn" type="submit">🔍</button>
+            </form>
+
+            <!-- Nav Links -->
+            <ul class="navbar-nav ms-auto ms-lg-3">
+                <li class="nav-item">
+                    <a class="nav-link" href="{{ url_for('products') }}">Products</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="{{ url_for('about') }}">About</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="{{ url_for('contact') }}">Help</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="{{ url_for('cart') }}">
+                        🛒 Cart
+                        {% if session.get('cart') %}
+                        <span class="badge bg-warning text-dark">{{ session['cart']|length }}</span>
+                        {% endif %}
+                    </a>
+                </li>
+
+                <!-- User Auth -->
+                {% if session.get('user') %}
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" href="#" data-bs-toggle="dropdown">
+                        👤 {{ session['user']['name'].split()[0] }}
+                    </a>
+                    <ul class="dropdown-menu dropdown-menu-end">
+                        <li><span class="dropdown-item-text text-muted small">{{ session['user']['email'] }}</span></li>
+                        <li><hr class="dropdown-divider"></li>
+                        <li><a class="dropdown-item" href="{{ url_for('logout') }}">🚪 Logout</a></li>
+                    </ul>
+                </li>
+                {% else %}
+                <li class="nav-item">
+                    <a class="nav-link" href="{{ url_for('login') }}">Login</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link btn btn-warning text-dark px-3 ms-1 rounded fw-bold"
+                       href="{{ url_for('register') }}">Register</a>
+                </li>
+                {% endif %}
+
+            </ul>
+
+        </div>
+    </div>
+</nav>
+
+<!-- Category Bar -->
+{% if categories is defined and categories %}
+<div class="category-bar">
+    <div class="container-fluid px-3">
+        <div class="category-scroll d-flex gap-2">
+            <a href="{{ url_for('home') }}"
+               class="btn btn-sm {% if not active_category %}btn-warning{% else %}btn-outline-warning{% endif %}">
+                All
+            </a>
+            {% for cat in categories %}
+            <a href="{{ url_for('home', category=cat) }}"
+               class="btn btn-sm {% if active_category == cat %}btn-warning{% else %}btn-outline-warning{% endif %}">
+                {{ cat }}
+            </a>
+            {% endfor %}
+        </div>
+    </div>
+</div>
+{% endif %}
+
+{% block content %}{% endblock %}
+
+<!-- Footer -->
+<footer class="bg-dark text-white pt-5 pb-3">
+    <div class="container">
+        <div class="row">
+
+            <div class="col-md-4 mb-4">
+                <h5 class="fw-bold">🛍️ Malika</h5>
+                <p class="text-white">Quality products delivered to your door. Shop smart, shop Malika.</p>
+            </div>
+
+            <div class="col-md-4 mb-4">
+                <h5 class="fw-bold">Quick Links</h5>
+                <ul class="list-unstyled">
+                    <li><a href="{{ url_for('home') }}" class="text-white text-decoration-none">🏠 Home</a></li>
+                    <li><a href="{{ url_for('products') }}" class="text-white text-decoration-none">Products</a></li>
+                    <li><a href="{{ url_for('about') }}" class="text-white text-decoration-none">About</a></li>
+                    <li><a href="{{ url_for('contact') }}" class="text-white text-decoration-none">Help</a></li>
+                    <li>
+                        <a href="{{ url_for('cart') }}" class="text-white text-decoration-none">
+                            🛒 Cart
+                            {% if session.get('cart') %}
+                            <span class="badge bg-warning text-dark">{{ session['cart']|length }}</span>
+                            {% endif %}
+                        </a>
+                    </li>
+                </ul>
+            </div>
+
+            <div class="col-md-4 mb-4">
+                <h5 class="fw-bold">Contact Us</h5>
+                <p class="text-white mb-1">📧 info@malika.com</p>
+                <p class="text-white mb-1">📞 +254 700 000 000</p>
+                <p class="text-white">📍 Mombasa, Kenya</p>
+            </div>
+
+        </div>
+        <hr class="border-secondary">
+        <p class="text-center text-white mb-0">© 2026 Malika. All rights reserved.</p>
+    </div>
+</footer>
+
+<script src="{{ url_for('static', filename='js/bootstrap.bundle.min.js') }}"></script>
+</body>
+</html>

@@ -1,0 +1,128 @@
+/* ===== NAVBAR ===== */
+.navbar {
+    background-color: #1a1a2e;
+    padding: 10px 0;
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+    box-shadow: 0 2px 10px rgba(0,0,0,0.3);
+}
+
+.logo-text {
+    font-size: 1.5rem;
+    font-weight: 900;
+    color: #f5a623;
+    letter-spacing: 3px;
+}
+
+.search-form {
+    width: 100%;
+    max-width: 500px;
+}
+
+.search-input {
+    border-radius: 25px 0 0 25px;
+    border: none;
+    padding: 8px 16px;
+    font-size: 0.9rem;
+}
+
+.search-input:focus {
+    box-shadow: none;
+    outline: none;
+}
+
+.search-btn {
+    background-color: #f5a623;
+    border-radius: 0 25px 25px 0;
+    border: none;
+    padding: 8px 16px;
+    font-size: 0.9rem;
+}
+
+.search-btn:hover {
+    background-color: #e09415;
+}
+
+.navbar-nav .nav-link {
+    color: #ffffff !important;
+    font-size: 0.9rem;
+    padding: 6px 12px;
+}
+
+.navbar-nav .nav-link:hover {
+    color: #f5a623 !important;
+}
+
+/* ===== CATEGORY BAR ===== */
+.category-bar {
+    background-color: #f8f9fa;
+    border-bottom: 1px solid #dee2e6;
+    padding: 10px 0;
+    overflow-x: auto;
+}
+
+.category-scroll {
+    flex-wrap: nowrap;
+    overflow-x: auto;
+    padding-bottom: 4px;
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+}
+
+.category-scroll::-webkit-scrollbar {
+    display: none;
+}
+
+/* ===== PAGE CONTENT ===== */
+.page-content {
+    min-height: calc(100vh - 200px);
+    padding: 20px 0;
+    background-color: #f8f9fa;
+}
+
+/* ===== PRODUCT CARDS ===== */
+.card {
+    border: none;
+    border-radius: 8px;
+    transition: transform 0.2s, box-shadow 0.2s;
+    background-color: #ffffff !important;
+}
+
+.card:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 6px 20px rgba(0,0,0,0.1) !important;
+}
+
+/* ===== FOOTER ===== */
+footer a {
+    color: white !important;
+    text-decoration: none;
+}
+
+footer a:hover {
+    color: #f5a623 !important;
+}
+
+/* ===== MOBILE ===== */
+@media (max-width: 767.98px) {
+    .search-form {
+        max-width: 100%;
+        margin: 10px 0;
+    }
+
+    .navbar-nav {
+        flex-direction: row;
+        gap: 5px;
+        padding: 5px 0;
+    }
+
+    .navbar-nav .nav-link {
+        padding: 4px 8px;
+        font-size: 0.85rem;
+    }
+
+    .category-bar {
+        padding: 8px 0;
+    }
+}

@@ -1,0 +1,24 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="page-content d-flex align-items-center justify-content-center">
+    <div class="card p-4 shadow" style="width:100%; max-width:400px;">
+        <div class="text-center mb-4">
+            <h3 class="fw-bold">🛍️ Malika</h3>
+            <p class="text-muted">Admin Panel Login</p>
+        </div>
+
+        {% if error %}
+        <div class="alert alert-danger">{{ error }}</div>
+        {% endif %}
+
+        <form method="POST" action="{{ url_for('admin_login') }}">
+            <div class="mb-3">
+                <label class="form-label fw-bold">Password</label>
+                <input type="password" name="password" class="form-control" placeholder="Enter admin password" required>
+            </div>
+            <button type="submit" class="btn btn-warning fw-bold w-100">Login</button>
+        </form>
+    </div>
+</div>
+{% endblock %}

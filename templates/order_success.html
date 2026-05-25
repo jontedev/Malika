@@ -1,0 +1,56 @@
+{% extends 'base.html' %}
+{% block content %}
+<div class="container" style="margin-top: 40px; margin-bottom: 60px;">
+    <div class="row justify-content-center">
+        <div class="col-md-6 text-center">
+            <div class="card shadow p-5">
+                <div class="mb-4">
+                    <span style="font-size: 80px;">✅</span>
+                </div>
+                <h2 class="fw-bold text-success">Order Placed!</h2>
+                <p class="text-muted mb-1">Thank you for shopping with Malika.</p>
+                <p class="text-muted">Your order <strong>#{{ order_id }}</strong> has been received.</p>
+
+                <hr>
+
+                <!-- M-Pesa Payment Instructions -->
+                <div class="alert alert-warning text-start">
+                    <h5 class="fw-bold">📱 Complete Your Payment</h5>
+                    <p class="mb-1">Please send payment via M-Pesa to:</p>
+                    <div class="bg-white rounded p-3 mb-2">
+                        <p class="mb-1"><strong>Till Number:</strong> <span class="text-success fs-5">200502</span></p>
+                        <p class="mb-1"><strong>Business Name:</strong> Malika Ltd</p>
+                        <p class="mb-0"><strong>Reference:</strong> Order #{{ order_id }}</p>
+                    </div>
+                    <small class="text-muted">Use your order number as the M-Pesa reference/reason</small>
+                </div>
+
+                <!-- Payment Status -->
+                <div class="alert alert-info">
+                    <p class="mb-0">⏳ Payment Status: <strong>Pending</strong></p>
+                    <small class="text-muted">We will confirm your payment and contact you shortly</small>
+                </div>
+
+                <!-- M-Pesa Steps -->
+                <div class="text-start mb-3">
+                    <h6 class="fw-bold">How to pay:</h6>
+                    <ol class="text-muted small">
+                        <li>Go to M-Pesa on your phone</li>
+                        <li>Select <strong>Lipa na M-Pesa</strong></li>
+                        <li>Select <strong>Buy Goods & Services</strong></li>
+                        <li>Enter Till Number <strong>200502</strong></li>
+                        <li>Enter amount and your M-Pesa PIN</li>
+                        <li>Use <strong>Order #{{ order_id }}</strong> as reference</li>
+                    </ol>
+                </div>
+
+                <hr>
+                <div class="d-flex gap-2 justify-content-center mt-3">
+                    <a href="{{ url_for('home') }}" class="btn btn-dark">🏠 Home</a>
+                    <a href="{{ url_for('products') }}" class="btn btn-warning fw-bold">🛍️ Shop More</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

@@ -1,0 +1,60 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="page-content background container">
+
+    <!-- Hero Banner -->
+    <div class="text-center py-5" style="background: rgba(232, 69, 69, 0.1);">
+        <h1 class="fw-bold" style="color:#e84545;">About Malika</h1>
+        <p class="lead text-muted">The story behind our brand</p>
+    </div>
+
+    <div class="container py-5">
+
+        <!-- Our Story -->
+        <div class="row align-items-center mb-5">
+            <div class="col-md-6 mb-4">
+                <h2 class="fw-bold" style="color:#e84545;">Our Story</h2>
+                <p>Malika was born from a simple idea — everyone deserves access to quality products at fair prices. We started small but our passion for great products and excellent service has driven us to grow into a trusted online store.</p>
+                <p>Based in Mombasa, Kenya, we serve customers across the country with fast delivery and genuine products.</p>
+            </div>
+            <div class="col-md-6 text-center">
+                <img src="{{ url_for('static', filename='images/bg2.0.png') }}" alt="Malika" class="img-fluid" style="max-height:250px;">
+            </div>
+        </div>
+
+        <!-- Why Choose Us -->
+        <h2 class="fw-bold text-center mb-4" style="color:#e84545;">Why Choose Us</h2>
+        <div class="row text-center mb-5">
+            <div class="col-md-4 mb-4">
+                <div class="card p-4 h-100 shadow-sm">
+                    <div class="fs-1">🏆</div>
+                    <h5 class="fw-bold mt-3">Quality Products</h5>
+                    <p class="text-muted">Every product is carefully selected and verified before listing.</p>
+                </div>
+            </div>
+            <div class="col-md-4 mb-4">
+                <div class="card p-4 h-100 shadow-sm">
+                    <div class="fs-1">🚚</div>
+                    <h5 class="fw-bold mt-3">Fast Delivery</h5>
+                    <p class="text-muted">We deliver across Kenya quickly and safely to your doorstep.</p>
+                </div>
+            </div>
+            <div class="col-md-4 mb-4">
+                <div class="card p-4 h-100 shadow-sm">
+                    <div class="fs-1">💬</div>
+                    <h5 class="fw-bold mt-3">24/7 Support</h5>
+                    <p class="text-muted">Our team is always ready to help you with any questions.</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Mission -->
+        <div class="text-center py-4 px-3 rounded" style="background: rgba(232, 69, 69, 0.1);">
+            <h2 class="fw-bold" style="color:#e84545;">Our Mission</h2>
+            <p class="lead">To make online shopping simple, affordable and trustworthy for every Kenyan.</p>
+        </div>
+
+    </div>
+</div>
+{% endblock %}

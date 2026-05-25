@@ -1,0 +1,149 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="page-content container">
+    <div class="d-flex justify-content-between align-items-center mb-4">
+        <h2 class="fw-bold">🛍️ Malika Dashboard</h2>
+        <a href="{{ url_for('admin_logout') }}" class="btn btn-danger">Logout</a>
+    </div>
+
+    <!-- Add Product Form -->
+    <div class="card mb-5 p-4">
+        <h4 class="mb-3">Add Product</h4>
+        <form method="POST" action="{{ url_for('add_product') }}" enctype="multipart/form-data">
+            <div class="mb-3">
+                <input type="text" name="name" class="form-control" placeholder="Product Name" required>
+            </div>
+            <div class="mb-3">
+                <input type="number" name="price" class="form-control" placeholder="Price (Ksh)" required>
+            </div>
+            <div class="mb-3">
+                <textarea name="description" class="form-control" placeholder="Description" rows="3"></textarea>
+            </div>
+            <div class="mb-3">
+                <input type="text" name="category" class="form-control" placeholder="Category">
+            </div>
+            <div class="mb-3">
+                <label class="form-label fw-bold">Product Image</label>
+                <input type="file" name="image" class="form-control" accept="image/*" onchange="previewImage(this)">
+            </div>
+            <div class="mb-3 text-center" id="previewContainer" style="display:none;">
+                <img id="imagePreview" src="" alt="Preview" class="img-fluid rounded" style="max-height:200px;">
+            </div>
+            <button type="submit" class="btn btn-warning fw-bold w-100">Add Product</button>
+        </form>
+    </div>
+
+    <!-- Orders Section -->
+    {% if orders %}
+    <h4 class="mb-3">📦 Recent Orders</h4>
+    <div class="table-responsive mb-5">
+        <table class="table table-bordered table-hover">
+            <thead class="table-dark">
+                <tr>
+                    <th>#</th>
+                    <th>Name</th>
+                    <th>Phone</th>
+                    <th>Address</th>
+                    <th>Total</th>
+                    <th>Status</th>
+                    <th>Date</th>
+                    <th>Action</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for order in orders %}
+                <tr>
+                    <td>{{ order[0] }}</td>
+                    <td>{{ order[1] }}</td>
+                    <td>{{ order[2] }}</td>
+                    <td>{{ order[3] }}</td>
+                    <td>Ksh {{ order[4] | int }}</td>
+                    <td>
+                        <span class="badge {% if order[5] == 'pending' %}bg-warning text-dark{% elif order[5] == 'paid' %}bg-success{% else %}bg-danger{% endif %}">
+                            {{ order[5] }}
+                        </span>
+                    </td>
+                    <td>{{ order[6] }}</td>
+                    <td>
+                        <form method="POST" action="{{ url_for('update_order_status', order_id=order[0]) }}">
+                            {% if order[5] == 'pending' %}
+                            <button name="status" value="paid" class="btn btn-success btn-sm mb-1">
+                                ✅ Mark Paid
+                            </button>
+                            {% elif order[5] == 'paid' %}
+                            <button name="status" value="pending" class="btn btn-warning btn-sm text-dark mb-1">
+                                ⏳ Pending
+                            </button>
+                            {% endif %}
+                            {% if order[5] != 'cancelled' %}
+                            <button name="status" value="cancelled" class="btn btn-danger btn-sm">
+                                ❌ Cancel
+                            </button>
+                            {% endif %}
+                        </form>
+                    </td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+    {% endif %}
+
+    <!-- Products List -->
+    <h4 class="mb-3">All Products</h4>
+    <div class="table-responsive">
+        <table class="table table-bordered table-hover">
+            <thead class="table-dark">
+                <tr>
+                    <th>Image</th>
+                    <th>Name</th>
+                    <th>Price</th>
+                    <th>Category</th>
+                    <th>Description</th>
+                    <th>Action</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for product in products %}
+                <tr>
+                    <td>
+                        {% if product[4] %}
+                        <img src="{{ url_for('static', filename='images/products/' + product[4]) }}"
+                             alt="{{ product[1] }}" style="width:60px; height:60px; object-fit:cover;" class="rounded">
+                        {% else %}
+                        <span class="text-muted">No image</span>
+                        {% endif %}
+                    </td>
+                    <td>{{ product[1] }}</td>
+                    <td>Ksh {{ product[2] | int }}</td>
+                    <td>{{ product[5] }}</td>
+                    <td>{{ product[3] }}</td>
+                    <td>
+                        <a href="{{ url_for('edit_product', id=product[0]) }}" class="btn btn-sm btn-warning">✏️ Edit</a>
+                        <a href="{{ url_for('delete_product', id=product[0]) }}"
+                           class="btn btn-danger btn-sm"
+                           onclick="return confirm('Delete this product?')">Delete</a>
+                    </td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+</div>
+
+<script>
+function previewImage(input) {
+    const container = document.getElementById('previewContainer');
+    const preview = document.getElementById('imagePreview');
+    if (input.files && input.files[0]) {
+        const reader = new FileReader();
+        reader.onload = function(e) {
+            preview.src = e.target.result;
+            container.style.display = 'block';
+        }
+        reader.readAsDataURL(input.files[0]);
+    }
+}
+</script>
+{% endblock %}
