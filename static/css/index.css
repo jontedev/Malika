@@ -16,8 +16,9 @@
 }
 
 .search-form {
-    width: 100%;
-    max-width: 500px;
+    width: 40%;
+    max-width: 400px;
+    min-width: 200px;
 }
 
 .search-input {
@@ -107,8 +108,9 @@ footer a:hover {
 /* ===== MOBILE ===== */
 @media (max-width: 767.98px) {
     .search-form {
-        max-width: 100%;
-        margin: 10px 0;
+    width: 100%;
+    max-width: 100%;
+    margin: 10px 0;
     }
 
     .navbar-nav {
