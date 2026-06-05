@@ -30,7 +30,7 @@
         <div class="collapse navbar-collapse" id="navbarMenu">
 
             <!-- Search -->
-            <form class="search-form d-flex mx-auto my-2 my-md-0"
+            <form class="search-form d-flex mx-auto my-2 my-md-0 flex-shrink-1"
                   method="GET"
                   action="{{ url_for('home') }}">
                 <input type="text"
@@ -42,7 +42,7 @@
             </form>
 
             <!-- Nav Links -->
-            <ul class="navbar-nav ms-auto ms-lg-3">
+            <ul class="navbar-nav ms-auto align-items-center flex-row flex-wrap justify-content-end gap-1">
                 <li class="nav-item">
                     <a class="nav-link" href="{{ url_for('products') }}">Products</a>
                 </li>
