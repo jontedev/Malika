@@ -15,7 +15,7 @@ UPLOAD_FOLDER = 'static/images/products'
 ALLOWED_EXTENSIONS = {'png', 'jpg', 'jpeg', 'gif', 'webp'}
 app.config['UPLOAD_FOLDER'] = UPLOAD_FOLDER
 
-ADMIN_PASSWORD = os.getenv('ADMIN_PASSWORD', '222005')
+ADMIN_PASSWORD = os.getenv('ADMIN_PASSWORD', '22@2005')
 
 def allowed_file(filename):
     return '.' in filename and \
